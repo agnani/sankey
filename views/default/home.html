@@ -1,0 +1,120 @@
+<head>
+    <!-- CSS only -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <!-- JS, Popper.js, and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" ></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" ></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" ></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+</head>
+<title>Home Page</title>
+<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+    <a class="navbar-brand" href="{{=URL('home')}}">
+        <img src="/Sankey/static/images/main-logo.png" width="30" height="30" class="d-inline-block align-top" alt="" loading="lazy">
+        Sankey Solutions
+    </a>
+    <form class="form-inline my-2 my-lg-0">
+        <label class="form-control mr-sm-2" style= 'background: transparent; border-color: transparent;'>{{=session.name}}</label>
+        <a href="{{=URL('logout')}}" class="btn btn-outline-primary my-2 my-sm-0" type="submit" >Logout</a>
+    </form>
+</nav>
+<div class="container" style="max-width: 1500px;">
+    <br>
+    <div class="shadow-lg mb-5 bg-white rounded">
+        <div class="jumbotron" style="background-color: #e3f2fd59; ">
+            <form method="post" action="searching" class="form-row">
+                <div class="form-group col-md-6"><h1>Employee Data</h1></div>
+                <div class="form-group col-md-3"></div>
+                <div class="form-group col-md-3"><input class="form-control" name="search" id="myInput" type="text" placeholder="Search.."></div>
+            </form>
+            <hr class="4">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">
+                                <a href="{{=URL('sorting', args=('id', 0))}}" style="color: white;">#</a>
+                            </th>
+                            <th scope="col">Name
+                            	<a href="{{=URL('sorting', args=('name', 0))}}" style="color: white;">
+                            		<i class="fas fa-arrow-up"></i>
+                            	</a>
+                            	<a href="{{=URL('sorting', args=('name', 1))}}" style="color: white;">
+                            		<i class="fas fa-arrow-down"></i>
+                            	</a>
+                            </th>
+                            <th scope="col">Email
+                            	<a href="{{=URL('sorting', args=('email', 0))}}" style="color: white;">
+                            		<i class="fas fa-arrow-up"></i>
+                            	</a>
+                            	<a href="{{=URL('sorting', args=('email', 1))}}" style="color: white;">
+                            		<i class="fas fa-arrow-down"></i>
+                            	</a>
+                            </th>
+                            <th scope="col">Role
+                            	<a href="{{=URL('sorting', args=('role', 0))}}" style="color: white;">
+                            		<i class="fas fa-arrow-up"></i>
+                            	</a>
+                            	<a href="{{=URL('sorting', args=('role', 1))}}" style="color: white;">
+                            		<i class="fas fa-arrow-down"></i>
+                            	</a>
+                            </th>
+                            <th scope="col">Date
+                            	<a href="{{=URL('sorting', args=('joining', 0))}}" style="color: white;">
+                            		<i class="fas fa-arrow-up"></i>
+                            	</a>
+                            	<a href="{{=URL('sorting', args=('joining', 1))}}" style="color: white;">
+                            		<i class="fas fa-arrow-down"></i>
+                            	</a>
+                            </th>
+                            <th scope="col">Salary
+                            	<a href="{{=URL('sorting', args=('salary', 0))}}" style="color: white;">
+                            		<i class="fas fa-arrow-up"></i>
+                            	</a>  
+                            	<a href="{{=URL('sorting', args=('salary', 1))}}" style="color: white;">
+                            		<i class="fas fa-arrow-down"></i>
+                            	</a>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody id="myList">
+                        {{for row in msg:}}
+                        {{j=row.id}}
+                        <tr>
+                            <th><a href="{{=URL('employee', args=(j))}}">{{=row.id}}</a></th>
+                            <td><a href="{{=URL('employee', args=(j))}}">{{=row.name}}</a></td>
+                            <td><a href="{{=URL('employee', args=(j))}}">{{=row.email}}</a></td>
+                            <td><a href="{{=URL('employee', args=(j))}}">{{=row.role}}</a></td>
+                            <td><a href="{{=URL('employee', args=(j))}}">{{=row.joining}}</a></td>
+                            <td><a href="{{=URL('employee', args=(j))}}">{{=row.salary}}</a></td>
+                        </tr>
+                        {{pass}}
+                    </tbody>
+                </table>
+            </div>
+            <br><br>
+            {{if s_role == "SuperUser":}}
+                <a href="{{=URL('insert')}}" class="btn btn-primary">Add a employee</a>
+            {{pass}}
+            <br><br><br>
+            {{if page == 1:}}
+            {{else:}}
+                <a class="btn btn-default btn-danger" href="{{=URL(vars={'page':int(request.vars.page)-1})}}">Back</a>
+            {{pass}}
+            {{if page < max:}}
+                <a class="float-right btn btn-default btn-success" href="{{=URL(vars={'page':int(request.vars.page)+1})}}">Next</a>
+            {{pass}}
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myList tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>

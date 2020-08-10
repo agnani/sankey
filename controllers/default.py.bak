@@ -1,0 +1,50 @@
+# -*- coding: utf-8 -*-
+# -------------------------------------------------------------------------
+# This is a sample controller
+# this file is released under public domain and you can use without limitations
+# -------------------------------------------------------------------------
+
+# ---- example index page ----
+def index():
+    msg = "out if"
+    if request.post_vars:
+        msg="in index"
+        redirect(URL('login'))
+    return locals()
+
+def login():
+    user1 = "manishagnani1@gmail.com"
+    pas1 = "manishagnani"
+    user=""
+    pas=""
+    msg=""
+    if request.post_vars:
+        user = request.post_vars.usr
+        pas = request.post_vars.pas
+        if user1==user:
+            if pas1==pas:
+                msg="Login successful"
+                redirect(URL('home'))
+            else:
+                msg="Wrong Password"
+        else:
+            msg="User not registered"
+    return locals()
+
+            #Name     Email                EmpId     Date       Salary
+def home():
+    msg = [ ("Manish", "manish@gmail.com", "12345", "12-12-2012", "10000"),
+            ("Ankur", "ankur.p@sankey.com", "2569", "15-6-2018", "25000" ),
+            ("Suyog", "suyog.j@sankey.com", "9999", "26-9-2018", "25000" ),
+            ("HR", "hr@sankey.com", "1111", "3-9-2010", "50000")]
+    test="12345"
+    return locals()
+
+def employee():
+    msg = [ ("Manish", "manish@gmail.com", "12345", "12-12-2012", "10000"),
+            ("Ankur", "ankur.p@sankey.com", "2569", "15-6-2018", "25000" ),
+            ("Suyog", "suyog.j@sankey.com", "9999", "26-9-2018", "25000" ),
+            ("HR", "hr@sankey.com", "1111", "3-9-2010", "50000")]
+
+    i = int(request.args(0))
+    return locals()

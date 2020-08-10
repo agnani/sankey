@@ -1,0 +1,71 @@
+<head>
+    <!--CSS only -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <!-- JS, Popper.js, and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" ></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" ></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" ></script>
+</head>
+<Title>
+    Sankey Solutions
+</Title>
+<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+    <a class="navbar-brand" href="{{=URL('home')}}">
+        <img src="/Sankey/static/images/main-logo.png" width="30" height="30" class="d-inline-block align-top" alt="" loading="lazy">
+        Sankey Solutions
+    </a>
+    <form class="form-inline my-2 my-lg-0">
+        <label class="form-control mr-sm-2" style= 'background: transparent; border-color: transparent;'>{{=session.name}}</label>
+        <a href="{{=URL('logout')}}" class="btn btn-outline-primary my-2 my-sm-0" type="submit" >Logout</a>
+    </form>
+</nav>
+<div class="container" style="max-width: 850px;">
+    <br><br>
+    <div class="shadow-lg mb-5 bg-white rounded">
+        <div class="jumbotron" style="background-color: #e3f2fd59; ">
+            <h5 class="display-5">
+                Employee Details
+            </h5><br>
+            <div class="table-responsive">
+                <table class="table">
+                    <tr>
+                        <th>Name:</th>
+                        <td>{{=msg.name}}</td>
+                    </tr>
+                    <tr>
+                        <th>Surname:</th>
+                        <td>{{=msg.surname}}</td>
+                    </tr>
+                    <tr>
+                        <th>Email:</th>
+                        <td>{{=msg.email}}</td>
+                    </tr>
+                    <tr>
+                        <th>Role:</th>
+                        <td>{{=msg.role}}</td>
+                    </tr>
+                    <tr>
+                        <th>Date:</th>
+                        <td>{{=msg.joining}}</td>
+                    </tr>
+                    <tr>
+                        <th>Salary:</th>
+                        <td>{{=msg.salary}}</td>
+                    </tr>
+                    <tr>
+                        <th>Gender:</th>
+                        <td>{{=msg.gender}}</td>
+                    </tr>
+                </table>
+            </div>
+            {{send = msg.id}}
+            {{if s_role == "Admin" or s_role == "SuperUser" :}}
+
+                <a href="{{=URL('update', args=(send) )}}" class="btn btn-primary">Update</a>
+                <a href="{{=URL('delete', args=(send) )}}" class="btn btn-warning">Delete</a>
+                <a href="{{=URL('home')}}" class="float-right btn btn-danger">Back</a>
+            {{pass}}
+        </div>
+    </div>
+</div>

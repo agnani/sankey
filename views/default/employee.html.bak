@@ -1,0 +1,64 @@
+<head>
+    <!-- CSS only -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <!-- JS, Popper.js, and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" ></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" ></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" ></script>
+</head>
+<Title>
+    Sankey Solutions
+</Title>
+<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+    <a class="navbar-brand" href="/Sankey/default/index">
+        <img src="https://sankeysolutions.com/assets/main-logo.png" width="30" height="30" class="d-inline-block align-top" alt="" loading="lazy">
+        Sankey Solutions
+    </a>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <a href="login">
+            <button class="btn btn-outline-primary my-2 my-sm-0" type="submit" >Login</button>
+        </a>
+    </form>
+</nav>
+<div class="container" style="max-width: 850px;">
+    <br><br>
+    <div class="shadow-lg mb-5 bg-white rounded">
+        <div class="jumbotron" style="background-color: #e3f2fd59; ">
+            <h5 class="display-5">
+                Employee Details
+            </h5><br>
+            <div class="table-responsive">
+                <table class="table">
+                    <tr>
+                        <th>Name:</th>
+                        <td>{{=msg[i][0]}}</td>
+                    </tr>
+                    <tr>
+                        <th>Email:</th>
+                        <td>{{=msg[i][1]}}</td>
+                    </tr>
+                    <tr>
+                        <th>Employee ID:</th>
+                        <td>{{=msg[i][2]}}</td>
+                    </tr>
+                    <tr>
+                        <th>Date:</th>
+                        <td>{{=msg[i][3]}}</td>
+                    </tr>
+                    <tr>
+                        <th>Salary:</th>
+                        <td>{{=msg[i][4]}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-down-up" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" d="M11 3.5a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5z"/>
+  <path fill-rule="evenodd" d="M10.646 2.646a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L11 3.707 8.354 6.354a.5.5 0 1 1-.708-.708l3-3zm-9 7a.5.5 0 0 1 .708 0L5 12.293l2.646-2.647a.5.5 0 1 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 0 1 0-.708z"/>
+  <path fill-rule="evenodd" d="M5 2.5a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-1 0V3a.5.5 0 0 1 .5-.5z"/>
+</svg>
