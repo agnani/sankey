@@ -9,35 +9,35 @@ from cryptography.fernet import Fernet
 
 
 def index():
-    msg = "out if"
-    search = ""
-    text = ""
-    cars = [{'car': 'Ford', 'year': 2005},
-            {'car': 'Mitsubishi', 'year': 2000},
-            {'car': 'BMW', 'year': 2019},
-            {'car': 'VW', 'year': 2011}]
-    test2 = cars[1]
-    test1 = test2.get("car")
-    if request.post_vars:
-        search = request.post_vars.search
-        msg = "in index"
-        text = test(search)
+    #msg = "out if"
+    #search = ""
+    #text = ""
+    #cars = [{'car': 'Ford', 'year': 2005},
+    #        {'car': 'Mitsubishi', 'year': 2000},
+    #        {'car': 'BMW', 'year': 2019},
+    #        {'car': 'VW', 'year': 2011}]
+    #test2 = cars[1]
+    #test1 = test2.get("car")
+    #if request.post_vars:
+    #    search = request.post_vars.search
+    #    msg = "in index"
+    #    text = test(search)
 
-    rows = db(db.sankeyEmployee).select(orderby=db.sankeyEmployee.id)
-    databas = db(db.sankeyUpload).select(orderby=db.sankeyUpload.id)
-    test55 = db(db.test).select(orderby=db.test.id)
-    max = db.sankeyUpload.id.max()
-    out = db(db.sankeyUpload).select(max).first()[max]
-    row = rows[0]
-    man = 1
-    data = 'Narayan&1'
-    data1 = crypt(data)
-    data2 = dcrypt(data1)
-    a = db(db.sankeyEmployee.id == 3).select().first()
-    a.update_record(softDelete=False)
-    row1 = db.sankeyEmployee(db.sankeyEmployee.id == 1)
-    id = 4
-    data = db.sankeyUpload(db.sankeyUpload.id == 2)
+    #rows = db(db.sankeyEmployee).select(orderby=db.sankeyEmployee.id)
+    #databas = db(db.sankeyUpload).select(orderby=db.sankeyUpload.id)
+    #test55 = db(db.test).select(orderby=db.test.id)
+    #max = db.sankeyUpload.id.max()
+    #out = db(db.sankeyUpload).select(max).first()[max]
+    #row = rows[0]
+    #man = 1
+    #data = 'Narayan&1'
+    #data1 = crypt(data)
+    #data2 = dcrypt(data1)
+    #a = db(db.sankeyEmployee.id == 1).select().first()
+    #a.update_record(department = "Devops")
+    #row1 = db.sankeyEmployee(db.sankeyEmployee.id == 1)
+    #id = 4
+    #data = db.sankeyUpload(db.sankeyUpload.id == 2)
     return locals()
 
 
@@ -293,16 +293,20 @@ def update():
         role = request.post_vars.role
         gender = request.post_vars.gender
         salary = request.post_vars.salary
+        department = request.post_vars.department
+        ending = request.post_vars.ending
         a = db(db.sankeyEmployee.id == i).select().first()
         a.update_record(name=name)
         a.update_record(surname=surname)
         a.update_record(email=email)
         a.update_record(joining=date)
         a.update_record(salary=salary)
+        a.update_record(department=department)
         a.update_record(role=role)
         a.update_record(gender=gender)
         a.update_record(ModifiedBY=s_name)
         a.update_record(ModificationTime=now)
+        a.update_record(ending=ending)
         redirect(URL('employee', args=(i)))
     pass
     return locals()
@@ -313,4 +317,36 @@ def delete():
     a = db(db.sankeyEmployee.id == id).select().first()
     a.update_record(softDelete=True)
     redirect(URL('home'))
+    return locals()
+
+
+def dashboard():
+    import datetime
+
+    march = datetime.datetime(2020, 3, 1)
+    april = datetime.datetime(2020, 4, 1)
+    may = datetime.datetime(2020, 5, 1)
+    june = datetime.datetime(2020, 6, 1)
+    july = datetime.datetime(2020, 7, 1)
+    august = datetime.datetime(2020, 8, 1)
+    september = datetime.datetime(2020, 9, 1)
+
+    join1 = db((db.sankeyEmployee.joining <= april) & (db.sankeyEmployee.joining > march)).count()
+    join2 = db((db.sankeyEmployee.joining <= may) & (db.sankeyEmployee.joining > april)).count()
+    join3 = db((db.sankeyEmployee.joining <= june) & (db.sankeyEmployee.joining > may)).count()
+    join4 = db((db.sankeyEmployee.joining <= july) & (db.sankeyEmployee.joining > june)).count()
+    join5 = db((db.sankeyEmployee.joining <= august) & (db.sankeyEmployee.joining > july)).count()
+    join6 = db((db.sankeyEmployee.joining <= september) & (db.sankeyEmployee.joining > august)).count()
+
+
+    end1 = db((db.sankeyEmployee.ending <= april) & (db.sankeyEmployee.ending > march)).count()
+    end2 = db((db.sankeyEmployee.ending <= may) & (db.sankeyEmployee.ending > april)).count()
+    end3 = db((db.sankeyEmployee.ending <= june) & (db.sankeyEmployee.ending > may)).count()
+    end4 = db((db.sankeyEmployee.ending <= july) & (db.sankeyEmployee.ending > june)).count()
+    end5 = db((db.sankeyEmployee.ending <= august) & (db.sankeyEmployee.ending > july)).count()
+    end6 = db((db.sankeyEmployee.ending <= september) & (db.sankeyEmployee.ending > august)).count()
+
+    Developer = db(db.sankeyEmployee.department == "Developer").count()
+    Tester = db(db.sankeyEmployee.department == "Tester").count()
+    Devops = db(db.sankeyEmployee.department == "Devops").count()
     return locals()

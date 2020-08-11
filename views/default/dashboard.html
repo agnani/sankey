@@ -1,0 +1,76 @@
+<head>
+    <!-- CSS only -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <!-- JS, Popper.js, and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" ></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" ></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" ></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+              ['Month',  'Start',     'End'],
+              ['March', {{=join1}}, {{=end1}}],
+              ['April', {{=join2}}, {{=end2}}],
+              ['May',   {{=join3}}, {{=end3}}],
+              ['June',  {{=join4}}, {{=end4}}],
+              ['July',  {{=join5}}, {{=end5}}],
+              ['August',{{=join6}}, {{=end6}}],
+          ]);
+
+        var options = {
+          title: 'Company Performance of last 6 months',
+          curveType: 'function',
+          legend: { position: 'bottom' }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+        chart.draw(data, options);
+      }
+    </script>
+    <script type="text/javascript">
+        // Load google charts
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+
+        // Draw the chart and set the chart values
+        function drawChart() {
+          var data = google.visualization.arrayToDataTable([
+          ['Task', 'Hours per Day'],
+          ['Tester', {{=Tester}}],
+          ['Devops', {{=Devops}}],
+          ['Developer', {{=Developer}}]
+        ]);
+
+          // Optional; add a title and set the width and height of the chart
+          var options = {'title':'Departments', 'width':550, 'height':400};
+
+          // Display the chart inside the <div> element with id="piechart"
+          var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+          chart.draw(data, options);
+        }
+    </script>
+</head>
+<title>Dashboard</title>
+<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+    <a class="navbar-brand" href="{{=URL('home')}}">
+        <img src="/Sankey/static/images/main-logo.png" width="30" height="30" class="d-inline-block align-top" alt="" loading="lazy">
+        Sankey Solutions
+    </a>
+    <form class="form-inline my-2 my-lg-0">
+        <label class="form-control mr-sm-2" style= 'background: transparent; border-color: transparent;'>{{=session.name}}</label>
+        <a href="{{=URL('logout')}}" class="btn btn-outline-primary my-2 my-sm-0" type="submit" >Logout</a>
+    </form>
+</nav>
+<br>
+<h1>Dashboard</h1>
+
+<div id="curve_chart" style="width: 900px; height: 500px"></div>
+<br>
+<div id="piechart"></div>
